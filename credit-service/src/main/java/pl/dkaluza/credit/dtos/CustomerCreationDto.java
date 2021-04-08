@@ -1,53 +1,38 @@
 package pl.dkaluza.credit.dtos;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.util.Pair;
+import org.springframework.stereotype.Component;
+import pl.dkaluza.credit.dtos.basic.CustomerDto;
+
 public class CustomerCreationDto {
-    private Long creditId;
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class Request {
+        private Long creditId;
 
-    private String firstName;
+        private String firstName;
 
-    private String surname;
+        private String surname;
 
-    private String pesel;
+        private String pesel;
 
-    public Long getCreditId() {
-        return creditId;
-    }
+        @Component
+        public static class CustomerWithIdMapper implements DtoMapper<Pair<CustomerDto, Long>, Request> {
+            @Override
+            public Request toDto(Pair<CustomerDto, Long> pair) {
+                Request request = new Request();
+                request.setCreditId(pair.getSecond());
 
-    public void setCreditId(Long creditId) {
-        this.creditId = creditId;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getPesel() {
-        return pesel;
-    }
-
-    public void setPesel(String pesel) {
-        this.pesel = pesel;
-    }
-
-    @Override
-    public String toString() {
-        return "CustomerCreationDto{" +
-            "creditId=" + creditId +
-            ", firstName='" + firstName + '\'' +
-            ", surname='" + surname + '\'' +
-            ", pesel='" + pesel + '\'' +
-            '}';
+                CustomerDto customer = pair.getFirst();
+                request.setFirstName(customer.getFirstName());
+                request.setSurname(customer.getSurname());
+                request.setPesel(customer.getPesel());
+                return request;
+            }
+        }
     }
 }

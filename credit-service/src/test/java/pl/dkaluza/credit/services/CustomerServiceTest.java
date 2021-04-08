@@ -9,7 +9,7 @@ import org.springframework.cloud.contract.stubrunner.spring.AutoConfigureStubRun
 import org.springframework.cloud.contract.stubrunner.spring.StubRunnerProperties;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import pl.dkaluza.credit.dtos.CustomerCreationDto;
-import pl.dkaluza.credit.dtos.CustomerDto;
+import pl.dkaluza.credit.dtos.basic.CustomerDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +58,7 @@ public class CustomerServiceTest {
     @Test
     public void createCustomer_validCreationObject_noException() {
         // Given
-        CustomerCreationDto customerCreation = new CustomerCreationDto();
+        CustomerCreationDto.Request customerCreation = new CustomerCreationDto.Request();
         customerCreation.setCreditId(3L);
         customerCreation.setFirstName("Alfa");
         customerCreation.setSurname("Romeo");

@@ -1,32 +1,29 @@
 package pl.dkaluza.credit.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import pl.dkaluza.credit.dtos.CreditIdDto;
+import pl.dkaluza.credit.dtos.CreditCreationDto;
 import pl.dkaluza.credit.dtos.CreditInformationDto;
 import pl.dkaluza.credit.services.CreditService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class CreditController {
     private final CreditService creditService;
 
-    @Autowired
-    public CreditController(CreditService creditService) {
-        this.creditService = creditService;
-    }
-
     @GetMapping("/credit")
-    public List<CreditInformationDto> getCredits() {
+    public List<CreditInformationDto.Response> getCredits() {
         return creditService.getCredits();
     }
 
     @PostMapping("/credit")
-    public CreditIdDto createCredit(@RequestBody CreditInformationDto creditInfo) {
-        return creditService.createCredit(creditInfo);
+    public CreditCreationDto.Response createCredit(@RequestBody @Valid CreditCreationDto.Request creditCreation) {
+        return creditService.createCredit(creditCreation);
     }
 }

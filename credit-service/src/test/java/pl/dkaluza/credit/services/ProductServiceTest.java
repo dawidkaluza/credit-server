@@ -9,7 +9,7 @@ import org.springframework.cloud.contract.stubrunner.spring.AutoConfigureStubRun
 import org.springframework.cloud.contract.stubrunner.spring.StubRunnerProperties;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import pl.dkaluza.credit.dtos.ProductCreationDto;
-import pl.dkaluza.credit.dtos.ProductDto;
+import pl.dkaluza.credit.dtos.basic.ProductDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +52,7 @@ public class ProductServiceTest {
     @Test
     public void createProduct_validCreationObject_noException() {
         // Given
-        ProductCreationDto productCreation = new ProductCreationDto();
+        ProductCreationDto.Request productCreation = new ProductCreationDto.Request();
         productCreation.setCreditId(3L);
         productCreation.setName("Computer");
         productCreation.setValue(500);

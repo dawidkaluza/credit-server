@@ -1,42 +1,35 @@
 package pl.dkaluza.credit.dtos;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.util.Pair;
+import org.springframework.stereotype.Component;
+import pl.dkaluza.credit.dtos.basic.ProductDto;
+
 public class ProductCreationDto {
-    private Long creditId;
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class Request {
+        private Long creditId;
 
-    private String name;
+        private String name;
 
-    private Integer value;
+        private Integer value;
 
-    public Long getCreditId() {
-        return creditId;
-    }
+        @Component
+        public static class ProductWithIdMapper implements DtoMapper<Pair<ProductDto, Long>, Request> {
+            @Override
+            public Request toDto(Pair<ProductDto, Long> pair) {
+                Request productCreation = new Request();
+                productCreation.setCreditId(pair.getSecond());
 
-    public void setCreditId(Long creditId) {
-        this.creditId = creditId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getValue() {
-        return value;
-    }
-
-    public void setValue(Integer value) {
-        this.value = value;
-    }
-
-    @Override
-    public String toString() {
-        return "ProductCreationDto{" +
-            "creditId=" + creditId +
-            ", name='" + name + '\'' +
-            ", value=" + value +
-            '}';
+                ProductDto product = pair.getFirst();
+                productCreation.setName(product.getName());
+                productCreation.setValue(product.getValue());
+                return productCreation;
+            }
+        }
     }
 }
