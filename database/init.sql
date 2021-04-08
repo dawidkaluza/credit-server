@@ -1,0 +1,3 @@
+CREATE DATABASE product;
+CREATE DATABASE credit;
+CREATE DATABASE customer;

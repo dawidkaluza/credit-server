@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>pl.dkaluza</groupId>
+    <artifactId>credit-server</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
+
+    <modules>
+        <module>credit-service</module>
+        <module>customer-service</module>
+        <module>product-service</module>
+    </modules>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.34.1</version>
+                <configuration>
+                    <images>
+                        <image>
+                            <name>credit-server-db:latest</name>
+                            <alias>credit-server-db</alias>
+
+                            <build>
+                                <dockerFile>${project.basedir}/database/Dockerfile</dockerFile>
+                            </build>
+
+                            <run>
+                                <namingStrategy>alias</namingStrategy>
+
+                                <wait>
+                                    <log>database system is ready to accept connections</log>
+                                    <time>20000</time>
+                                </wait>
+                            </run>
+                        </image>
+
+                        <image>
+                            <name>product-service:latest</name>
+                            <alias>product-service</alias>
+                            <run>
+                                <namingStrategy>alias</namingStrategy>
+
+                                <links>
+                                    <link>credit-server-db</link>
+                                </links>
+                            </run>
+                        </image>
+
+                        <image>
+                            <name>customer-service:latest</name>
+                            <alias>customer-service</alias>
+                            <run>
+                                <namingStrategy>alias</namingStrategy>
+
+                                <links>
+                                    <link>credit-server-db</link>
+                                </links>
+                            </run>
+                        </image>
+
+                        <image>
+                            <name>credit-service:latest</name>
+                            <alias>credit-service</alias>
+                            <run>
+                                <namingStrategy>alias</namingStrategy>
+
+                                <links>
+                                    <link>credit-server-db</link>
+                                    <link>product-service</link>
+                                    <link>customer-service</link>
+                                </links>
+
+                                <ports>
+                                    <port>8080:8080</port>
+                                </ports>
+                            </run>
+                        </image>
+                    </images>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
