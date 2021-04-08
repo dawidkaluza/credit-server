@@ -41,7 +41,7 @@ Content-Type: application/json
 
 {
   "credit": {
-    "creditName": "TV credit"
+    "name": "TV credit"
   },
   "customer": {
     "firstName": "Dawid",
@@ -81,7 +81,7 @@ Content-Type: application/json
 [
   {
     "credit": {
-      "creditName": "TV credit"
+      "name": "TV credit"
     },
     "customer": {
       "firstName": "Dawid",
