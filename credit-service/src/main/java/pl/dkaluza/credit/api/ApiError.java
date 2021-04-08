@@ -7,16 +7,18 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Singular;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
 import java.time.ZonedDateTime;
+import java.util.List;
 
 @Builder
 @Data
-public class ErrorResponse {
+public class ApiError {
     @JsonSerialize(using = HttpStatusSerializer.class, as = HttpStatus.class)
     private final HttpStatus status;
 
@@ -24,6 +26,9 @@ public class ErrorResponse {
     private final ZonedDateTime timestamp = ZonedDateTime.now();
 
     private final String message;
+
+    @Singular
+    private final List<ApiFieldError> fieldErrors;
 
     @JsonIgnore
     private final HttpHeaders headers;
