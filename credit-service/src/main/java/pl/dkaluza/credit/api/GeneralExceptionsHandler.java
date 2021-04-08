@@ -14,17 +14,17 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @Order
 public class GeneralExceptionsHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<Object> exceptionHandler(Exception ex) {
-        return ErrorResponse.builder()
+    public ResponseEntity<Object> exceptionHandler() {
+        return ApiError.builder()
             .status(HttpStatus.INTERNAL_SERVER_ERROR)
-            .message(ex.getMessage())
+            .message("Internal server error")
             .build()
             .toResponseEntity();
     }
 
     @Override
     protected ResponseEntity<Object> handleExceptionInternal(Exception ex, @Nullable Object body, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        return ErrorResponse.builder()
+        return ApiError.builder()
             .status(status)
             .message(ex.getMessage())
             .build()
