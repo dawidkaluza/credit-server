@@ -33,13 +33,14 @@ public class ProductService {
         int len = creditIds.size();
         for (int i = 0; i < len; i++) {
             int finalI = i;
-            orderedProducts.add(
-                products
-                    .stream()
-                    .filter(product -> product.getCreditId().equals(creditIds.get(finalI)))
-                    .findAny()
-                    .orElseThrow(() -> new ProductNotFoundException("No product with id=" + finalI))
-            );
+            Product product = products
+                .stream()
+                .filter(otherProduct -> otherProduct.getCreditId().equals(creditIds.get(finalI)))
+                .findAny()
+                .orElseThrow(() -> new ProductNotFoundException("No product with id=" + finalI));
+
+            orderedProducts.add(product);
+            products.remove(product);
         }
 
         return orderedProducts;

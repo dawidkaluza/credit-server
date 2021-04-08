@@ -33,13 +33,14 @@ public class CustomerService {
         int len = creditIds.size();
         for (int i = 0; i < len; i++) {
             int finalI = i;
-            orderedCustomers.add(
-                customers
-                    .stream()
-                    .filter(customer -> customer.getCreditId().equals(creditIds.get(finalI)))
-                    .findAny()
-                    .orElseThrow(() -> new CustomerNotFoundException("No customer with id=" + finalI))
-            );
+            Customer customer = customers
+                .stream()
+                .filter(otherCustomer -> otherCustomer.getCreditId().equals(creditIds.get(finalI)))
+                .findAny()
+                .orElseThrow(() -> new CustomerNotFoundException("No customer with id=" + finalI));
+
+            orderedCustomers.add(customer);
+            customers.remove(customer);
         }
         return orderedCustomers;
     }
