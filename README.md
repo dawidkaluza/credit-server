@@ -24,11 +24,13 @@ If you have necessary Maven and Docker on your PC, you can check this applicatio
 
 1. Copy project via git clone
 
-`git clone ....`
+`git clone https://github.com/dawidkaluza/credit-server.git`
 
-2. Open terminal in the dir where you cloned the project and run this simple maven command:
-
-`mvn clean install docker:build docker:run`
+2. Move to the dir where project has been cloned and run this simple maven command:
+```
+cd credit-server
+mvn clean install docker:build docker:run
+```
 
 Then all services, databases etc. will get ready to work.
 
