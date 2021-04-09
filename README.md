@@ -23,8 +23,9 @@ This web application provides very simple system to store history of clients' cr
 If you have necessary Maven and Docker on your PC, you can check this application on your own.
 
 1. Copy project via git clone
-
-`git clone https://github.com/dawidkaluza/credit-server.git`
+```
+git clone https://github.com/dawidkaluza/credit-server.git
+```
 
 2. Move to the dir where project has been cloned and run this simple maven command:
 ```
@@ -99,3 +100,10 @@ Content-Type: application/json
 ```
 
 In general, that's all. Very simple, but that's my first modularization via docker, anyway I think the whole project doesn't look so bad ^^
+
+After the work, don't forget to stop and remove the containers:
+```
+mvn docker:stop
+```
+
+If you don't do this, you may get errors while trying to start them again.
