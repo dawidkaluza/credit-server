@@ -1,6 +1,6 @@
 package pl.dkaluza.customer.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.dkaluza.customer.entities.Customer;
@@ -10,13 +10,9 @@ import pl.dkaluza.customer.services.CustomerService;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class CustomerController {
     private final CustomerService customerService;
-
-    @Autowired
-    public CustomerController(CustomerService customerService) {
-        this.customerService = customerService;
-    }
 
     @GetMapping("/customer")
     public List<Customer> getCustomers(@RequestParam("creditIds") List<Long> creditIds) throws CustomerNotFoundException {
