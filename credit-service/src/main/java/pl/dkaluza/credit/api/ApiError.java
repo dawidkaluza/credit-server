@@ -22,19 +22,20 @@ public class ApiError {
     @JsonSerialize(using = HttpStatusSerializer.class, as = HttpStatus.class)
     private final HttpStatus status;
 
+    private final String message;
+
     @Builder.Default
     private final ZonedDateTime timestamp = ZonedDateTime.now();
-
-    private final String message;
 
     @Singular
     private final List<ApiFieldError> fieldErrors;
 
     @JsonIgnore
-    private final HttpHeaders headers;
+    @Builder.Default
+    private final HttpHeaders headers = new HttpHeaders();
 
     public ResponseEntity<Object> toResponseEntity() {
-        return new ResponseEntity<>(this, status);
+        return new ResponseEntity<>(this, headers, status);
     }
 
     private static class HttpStatusSerializer extends JsonSerializer<HttpStatus> {
