@@ -12,10 +12,10 @@ Contract.make {
             contentType(applicationJson())
         }
         body(
-            creditId: 3,
-            firstName: "Alfa",
-            surname: "Romeo",
-            pesel: "11335577990"
+            creditId: $(regex("[1-9]+\\d*")),
+            firstName: $(regex("[A-Za-z0-9 ]+")),
+            surname: $(regex("[A-Za-z0-9 ]+")),
+            pesel: $(regex("\\d{11}"))
         )
     }
 

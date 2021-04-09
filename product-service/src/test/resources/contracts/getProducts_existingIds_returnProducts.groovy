@@ -3,7 +3,7 @@ package contracts
 import org.springframework.cloud.contract.spec.Contract
 
 Contract.make {
-    description("Returns products with given credit ids")
+    description("Returns products for existing ids")
 
     request {
         method GET()

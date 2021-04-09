@@ -12,9 +12,9 @@ Contract.make {
             contentType(applicationJson())
         }
         body(
-            creditId: 3,
-            name: "Computer",
-            value: 500
+            creditId: $(regex("[1-9]+\\d*")),
+            name: $(regex("[A-Za-z0-9 ]+")),
+            value: $(regex("[1-9]+\\d*"))
         )
     }
 

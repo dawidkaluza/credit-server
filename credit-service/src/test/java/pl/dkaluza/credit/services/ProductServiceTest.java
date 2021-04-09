@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.contract.stubrunner.spring.AutoConfigureStubRunner;
 import org.springframework.cloud.contract.stubrunner.spring.StubRunnerProperties;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.web.client.RestClientException;
 import pl.dkaluza.credit.dtos.ProductCreationDto;
 import pl.dkaluza.credit.dtos.basic.ProductDto;
 
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ExtendWith(SpringExtension.class)
@@ -47,6 +49,16 @@ public class ProductServiceTest {
         assertEquals(products.get(0).getValue(), 100);
         assertEquals(products.get(1).getName(), "Car");
         assertEquals(products.get(1).getValue(), 1000);
+    }
+
+    @Test
+    public void getCustomersByIds_notExistingIds_throwException() {
+        // Given
+        List<Long> ids = new ArrayList<>();
+        ids.add(3L);
+
+        // When, then
+        assertThrows(RestClientException.class, () -> productService.getProductsByIds(ids));
     }
 
     @Test

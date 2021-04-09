@@ -27,6 +27,7 @@ public class GeneralExceptionsHandler extends ResponseEntityExceptionHandler {
         return ApiError.builder()
             .status(status)
             .message(ex.getMessage())
+            .headers(headers)
             .build()
             .toResponseEntity();
     }
