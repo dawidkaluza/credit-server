@@ -1,7 +1,8 @@
 FROM openjdk:8-alpine
-ENV SPRING_DATASOURCE_URL="jdbc:postgresql://credit-server-db:5432/credit"
+ENV SPRING_DATASOURCE_URL="jdbc:postgresql://credit-server-db:5432/credit_server"
 ENV SPRING_DATASOURCE_USERNAME=developer
 ENV SPRING_DATASOURCE_PASSWORD=developer
+ENV SPRING_JPA_PROPERTIES_HIBERNATE_DEFAULT_SCHEMA=credit
 ENV SPRING_JPA_DATABASE_PLATFORM="org.hibernate.dialect.PostgreSQLDialect"
 ENV SPRING_JPA_HIBERNATE_DDL_AUTO=update
 ENV PRODUCT_ORIGIN="http://product-service:8080/"

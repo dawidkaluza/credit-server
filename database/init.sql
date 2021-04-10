@@ -1,3 +1,4 @@
-CREATE DATABASE product;
-CREATE DATABASE credit;
-CREATE DATABASE customer;
+CREATE DATABASE credit_server;
+CREATE SCHEMA product;
+CREATE SCHEMA credit;
+CREATE SCHEMA customer;
