@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.math.BigDecimal;
@@ -18,6 +19,7 @@ public class Product {
     @Id
     private Long creditId;
 
+    @Column(length = 64)
     private String name;
 
     private Integer value;

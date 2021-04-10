@@ -9,12 +9,14 @@ import pl.dkaluza.credit.dtos.EntityMapper;
 import pl.dkaluza.credit.entities.Credit;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreditDto {
     @NotBlank
+    @Size(min = 3, max = 64)
     private String name;
 
     @Component

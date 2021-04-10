@@ -13,7 +13,7 @@ Contract.make {
         }
         body(
             creditId: $(regex("[1-9]+\\d*")),
-            name: $(regex("[A-Za-z0-9 ]+")),
+            name: $(regex("[A-Za-z0-9 ]{3,64}")),
             value: $(regex("[1-9]+\\d*"))
         )
     }
