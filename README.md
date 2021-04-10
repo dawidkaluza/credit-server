@@ -44,7 +44,7 @@ Content-Type: application/json
 
 {
   "credit": {
-    "name": "TV credit"
+    "name": "Car credit"
   },
   "customer": {
     "firstName": "Dawid",
@@ -52,7 +52,7 @@ Content-Type: application/json
     "pesel": "12345678900"
   },
   "product": {
-    "name": "TV",
+    "name": "Car",
     "value": 1200
   }
 }
@@ -84,7 +84,7 @@ Content-Type: application/json
 [
   {
     "credit": {
-      "name": "TV credit"
+      "name": "Car credit"
     },
     "customer": {
       "firstName": "Dawid",
@@ -92,7 +92,7 @@ Content-Type: application/json
       "pesel": "12345678900"
     },
     "product": {
-      "name": "TV",
+      "name": "Car",
       "value": 1200
     }
   }
