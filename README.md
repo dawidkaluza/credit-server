@@ -101,7 +101,7 @@ Content-Type: application/json
 
 In general, that's all. Very simple, but that's my first modularization via docker, anyway I think the whole project doesn't look so bad ^^
 
-After the work, don't forget to stop and remove the containers:
+After the work, you can easily stop and remove the containers:
 ```
 mvn docker:stop
 ```
