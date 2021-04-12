@@ -14,10 +14,12 @@ import javax.validation.constraints.Size;
 public class CustomerDto {
     @NotBlank
     @Size(min = 3, max = 64)
+    @Pattern(regexp = "^[A-Za-z0-9 ]*$", message = "First name must contain only letters, numbers and spaces")
     private String firstName;
 
     @NotBlank
     @Size(min = 3, max = 64)
+    @Pattern(regexp = "^[A-Za-z0-9 ]*$", message = "Surname must contain only letters, numbers and spaces")
     private String surname;
 
     @NotBlank
